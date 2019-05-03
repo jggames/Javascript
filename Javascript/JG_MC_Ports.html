@@ -1,0 +1,461 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en" xmlns:fb="http://ogp.me/ns/fb#">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Tandy MC-10 Emulator in Javascript">
+    <meta name="keywords" content="Tandy, mc-10, mc10, emulator, emulation, javascript, trs-80, trs80, radio shack, radioshack">
+    <meta name="viewport" content="width=device-width">
+    <title>MC-10 Javascript Emulator</title>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet'
+          type='text/css'>
+    <link rel="stylesheet" href="mc10.css?v=6">
+    <script src="https://apis.google.com/js/platform.js" async defer>
+    </script>
+    <meta property="og:title" content="MC-10 Emulator in Javascript" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./images/mc10_ss.jpg" />
+    <meta property="og:url" content="http://mc-10.com" />
+    <meta property="og:site_name" content="MC-10 Javascript Emulator" />
+    <meta property="fb:admins" content="701869110" />
+</head>
+<body>
+    <div id="fb-root"></div>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=202303830100&version=v2.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+    <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+    <div id="tv">
+        <canvas id="screen" width="512" height="384">
+            Your browser is not supported. Try Google Chrome.
+        </canvas>
+        <div id="controls">
+            <input id="reset" type="button" value="Reset" />
+            <!--            <input id="run" type="button" value="Pause" />-->
+            <input type="button" id="save" value="Save" />
+            <input type="file" id="cassette" name="cassette" />
+            <select id="cassetteList" name="cassetteList">
+                <option value="">- Select Cassette -</option>
+                <optgroup label="Basic Program Ports">
+                    <option value="11ASTER.C10">11ASTER [Type RUN to start]</option>
+                    <option value="3DLABY.C10">3DLABY [Type RUN to start]</option>
+                    <option value="9HOLEGLF.C10">9HOLEGOLF [Type RUN to start]</option>
+                    <option value="ABCSONG.C10">ABCSONG [Type RUN to start]</option>
+                    <option value="ABM.C10">ABM [Type RUN to start]</option>
+                    <option value="AEROJAM.C10">AEROJAM [Type RUN to start]</option>
+                    <option value="ALERT.C10">ALERT [Type RUN to start]</option>
+                    <option value="ALIENBOM.C10">ALIENBOM [Type RUN to start]</option>
+                    <option value="AMAZE.C10">AMAZE [Type RUN to start]</option>
+                    <option value="AMAZIN.C10">AMAZIN [Type RUN to start]</option>
+                    <option value="AMAZING.C10">AMAZING [Type RUN to start]</option>
+                    <option value="AMFOOTB.C10">AMFOOTB [Type RUN to start]</option>
+                    <option value="ANDROMED.C10">ANDROMED [Type RUN to start]</option>
+                    <option value="ANNEX.C10">ANNEX [Type RUN to start]</option>
+                    <option value="ARABIAN.C10">ARABIAN [Type RUN to start]</option>
+                    <option value="ASTER.C10">ASTER [Type RUN to start]</option>
+                    <option value="BACCARAT.C10">BACCARAT [Type RUN to start]</option>
+                    <option value="BALLY.C10">BALLY [Type RUN to start]</option>
+                    <option value="BANDIT.C10">BANDIT [Type RUN to start]</option>
+                    <option value="BARREL.C10">BARREL [Type RUN to start]</option>
+                    <option value="BASE.C10">BASE [Type RUN to start]</option>
+                    <option value="BDOWNS.C10">BDOWNS [Type RUN to start]</option>
+                    <option value="BEETRAP.C10">BEETRAP [Type RUN to start]</option>
+                    <option value="BGAMMON.C10">BGAMMON [Type RUN to start]</option>
+                    <option value="BIGCHARS.C10">BIGCHARS [Type RUN to start]</option>
+                    <option value="BINROOM.C10">BINROOM [Type RUN to start]</option>
+                    <option value="BJACK.C10">BJACK [Type RUN to start]</option>
+                    <option value="BLITZ.C10">BLITZ [Type RUN to start]</option>
+                    <option value="BLKJCK.C10">BLKJCK [Type RUN to start]</option>
+                    <option value="BLOCKOUT.C10">BLOCKOUT [Type RUN to start]</option>
+                    <option value="BOBO.C10">BOBO [Type RUN to start]</option>
+                    <option value="BOOGALOO.C10">BOOGALOO [Type RUN to start]</option>
+                    <option value="BOWLING.C10">BOWLING [Type RUN to start]</option>
+                    <option value="BOXING.C10">BOXING [Type RUN to start]</option>
+                    <option value="BRICKS.C10">BRICKS [Type RUN to start]</option>
+                    <option value="BSHIP.C10">BSHIP [Type RUN to start]</option>
+                    <option value="BURGER.C10">BURGER [Type RUN to start]</option>
+                    <option value="CAPTCHEM.C10">CAPTCHEM [Type RUN to start]</option>
+                    <option value="CAVEHUNT.C10">CAVEHUNT [Type RUN to start]</option>
+                    <option value="CAVES.C10">CAVES [Type RUN to start]</option>
+                    <option value="CHECKRVZ.C10">CHECKRVZ [Type RUN to start]</option>
+                    <option value="CHESS.C10">CHESS [Type RUN to start]</option>
+                    <option value="CLUE.C10">CLUE [Type RUN to start]</option>
+                    <option value="COLDITZ.C10">COLDITZ [Type RUN to start]</option>
+                    <option value="COLOROID.C10">COLOROID [Type RUN to start]</option>
+                    <option value="COLUMNS.C10">COLUMNS [Type RUN to start]</option>
+                    <option value="CONNECT.C10">CONNECT [Type RUN to start]</option>
+                    <option value="CONVOY.C10">CONVOY [Type RUN to start]</option>
+                    <option value="CRAZY8S.C10">CRAZY8S [Type RUN to start]</option>
+                    <option value="CRIBBAGE.C10">CRIBBAGE [Type RUN to start]</option>
+                    <option value="CROPS.C10">CROPS [Type RUN to start]</option>
+                    <option value="CSS.C10">CSS [Type RUN to start]</option>
+                    <option value="CUBE.C10">CUBE [Type RUN to start]</option>
+                    <option value="CUPBALL.C10">CUPBALL [Type RUN to start]</option>
+                    <option value="CURSE.C10">CURSE [Type RUN to start]</option>
+                    <option value="DANTE.C10">DANTE [Type RUN to start]</option>
+                    <option value="DEFLECT.C10">DEFLECT [Type RUN to start]</option>
+                    <option value="DOGFIGHT.C10">DOGFIGHT [Type RUN to start]</option>
+                    <option value="DOMINOES.C10">DOMINOES [Type RUN to start]</option>
+                    <option value="DOTS.C10">DOTS [Type RUN to start]</option>
+                    <option value="DRAGLAIR.C10">DRAGLAIR [Type RUN to start]</option>
+                    <option value="DRAGON.C10">DRAGON [Type RUN to start]</option>
+                    <option value="DRAUGHTS.C10">DRAUGHTS [Type RUN to start]</option>
+                    <option value="DREIDEL.C10">DREIDEL [Type RUN to start]</option>
+                    <option value="DUCKIES.C10">DUCKIES [Type RUN to start]</option>
+                    <option value="FINANCE.C10">FINANCE [Type RUN to start]</option>
+                    <option value="FLIGHT.C10">FLIGHT [Type RUN to start]</option>
+                    <option value="FLOOD.C10">FLOOD [Type RUN to start]</option>
+                    <option value="FLTSIM.C10">FLTSIM [Type RUN to start]</option>
+                    <option value="FOUR.C10">FOUR [Type RUN to start]</option>
+                    <option value="FPANIC.C10">FPANIC [Type RUN to start]</option>
+                    <option value="FRUITFLY.C10">FRUITFLY [Type RUN to start]</option>
+                    <option value="GALILEAN.C10">GALILEAN [Type RUN to start]</option>
+                    <option value="GALISAT.C10">GALISAT [Type RUN to start]</option>
+                    <option value="GAMMON.C10">GAMMON [Type RUN to start]</option>
+                    <option value="GBUSTERS.C10">GBUSTERS [Type RUN to start]</option>
+                    <option value="GEOGRAPH.C10">GEOGRAPH [Type RUN to start]</option>
+                    <option value="GIGABONX.C10">GIGABONX [Type RUN to start]</option>
+                    <option value="GMCHESS.C10">GMCHESS [Type RUN to start]</option>
+                    <option value="GOFISH.C10">GOFISH [Type RUN to start]</option>
+                    <option value="GOMOKU.C10">GOMOKU [Type RUN to start]</option>
+                    <option value="GRAFDEMO.C10">GRAFDEMO [Type RUN to start]</option>
+                    <option value="GRAFSPEE.C10">GRAFSPEE [Type RUN to start]</option>
+                    <option value="GRAIL.C10">GRAIL [Type RUN to start]</option>
+                    <option value="GRAPHER.C10">GRAPHER [Type RUN to start]</option>
+                    <option value="GREENTHI.C10">GREENTHI [Type RUN to start]</option>
+                    <option value="GRIDFACT.C10">GRIDFACT [Type RUN to start]</option>
+                    <option value="GUNDAM.C10">GUNDAM [Type RUN to start]</option>
+                    <option value="HANOI.C10">HANOI [Type RUN to start]</option>
+                    <option value="HANUKKAH.C10">HANUKKAH [Type RUN to start]</option>
+                    <option value="HEXAGON.C10">HEXAGON [Type RUN to start]</option>
+                    <option value="HLANDER.C10">HLANDER [Type RUN to start]</option>
+                    <option value="HOROSCOP.C10">HOROSCOP [Type RUN to start]</option>
+                    <option value="HRACE.C10">HRACE [Type RUN to start]</option>
+                    <option value="HTOAD.C10">HTOAD [Type RUN to start]</option>
+                    <option value="HUNTER.C10">HUNTER [Type RUN to start]</option>
+                    <option value="HUSTLE.C10">HUSTLE [Type RUN to start]</option>
+                    <option value="INVADERS.C10">INVADERS [Type RUN to start]</option>
+                    <option value="ISLAND.C10">ISLAND [Type RUN to start]</option>
+                    <option value="JACK.C10">JACK [Type RUN to start]</option>
+                    <option value="JUNGLER.C10">JUNGLER [Type RUN to start]</option>
+                    <option value="KALSCOPE.C10">KALSCOPE [Type RUN to start]</option>
+                    <option value="KILLER.C10">KILLER [Type RUN to start]</option>
+                    <option value="KINGS.C10">KINGS [Type RUN to start]</option>
+                    <option value="KNIGHTS.C10">KNIGHTS [Type RUN to start]</option>
+                    <option value="KORPS.C10">KORPS [Type RUN to start]</option>
+                    <option value="LABYRINT.C10">LABYRINT [Type RUN to start]</option>
+                    <option value="MANDEL.C10">MANDEL [Type RUN to start]</option>
+                    <option value="MARSLAND.C10">MARSLAND [Type RUN to start]</option>
+                    <option value="MASTER.M.C10">MASTER.M [Type RUN to start]</option>
+                    <option value="MATTELFB.C10">MATTELFB [Type RUN to start]</option>
+                    <option value="MAXIT.C10">MAXIT [Type RUN to start]</option>
+                    <option value="MAZE.C10">MAZE [Type RUN to start]</option>
+                    <option value="MCDEMO.C10">MCDEMO [Type RUN to start]</option>
+                    <option value="MCMINE.C10">MCMINE [Type RUN to start]</option>
+                    <option value="MCTREK.C10">MCTREK [Type RUN to start]</option>
+                    <option value="METEORS.C10">METEORS [Type RUN to start]</option>
+                    <option value="MILLIPED.C10">MILLIPED [Type RUN to start]</option>
+                    <option value="MINES.C10">MINES [Type RUN to start]</option>
+                    <option value="MINIPAC.C10">MINIPAC [Type RUN to start]</option>
+                    <option value="MINISTRY.C10">MINISTRY [Type RUN to start]</option>
+                    <option value="MINOTAUR.C10">MINOTAUR [Type RUN to start]</option>
+                    <option value="MMAZE.C10">MMAZE [Type RUN to start]</option>
+                    <option value="MNOPLY.C10">MNOPLY [Type RUN to start]</option>
+                    <option value="MONOPOLY.C10">MONOPOLY [Type RUN to start]</option>
+                    <option value="MOONFX.C10">MOONFX [Type RUN to start]</option>
+                    <option value="MOTHER.C10">MOTHER [Type RUN to start]</option>
+                    <option value="MUSIC.C10">MUSIC [Type RUN to start]</option>
+                    <option value="NFLIGHT.C10">NFLIGHT [Type RUN to start]</option>
+                    <option value="NINJA.C10">NINJA [Type RUN to start]</option>
+                    <option value="NUKEWAR.C10">NUKEWAR [Type RUN to start]</option>
+                    <option value="ORANGE.C10">ORANGE [Type RUN to start]</option>
+                    <option value="ORBIT.C10">ORBIT [Type RUN to start]</option>
+                    <option value="OTHO36.C10">OTHO36 [Type RUN to start]</option>
+                    <option value="PADUTCH.C10">PADUTCH [Type RUN to start]</option>
+                    <option value="PEG.C10">PEG [Type RUN to start]</option>
+                    <option value="PENDU.C10">PENDU [Type RUN to start]</option>
+                    <option value="PLUNKIT.C10">PLUNKIT [Type RUN to start]</option>
+                    <option value="PROVINCE.C10">PROVINCE [Type RUN to start]</option>
+                    <option value="PYTHON.C10">PYTHON [Type RUN to start]</option>
+                    <option value="QUATRAIN.C10">QUATRAIN [Type RUN to start]</option>
+                    <option value="QUEST.C10">QUEST [Type RUN to start]</option>
+                    <option value="QUEST1.C10">QUEST1 [Type RUN to start]</option>
+                    <option value="QUESTVZ.C10">QUESTVZ [Type RUN to start]</option>
+                    <option value="RACEDRIV.C10">RACEDRIV [Type RUN to start]</option>
+                    <option value="RAINMAZE.C10">RAINMAZE [Type RUN to start]</option>
+                    <option value="RAT.C10">RAT [Type RUN to start]</option>
+                    <option value="RCHASE.C10">RCHASE [Type RUN to start]</option>
+                    <option value="REBOUND.C10">REBOUND [Type RUN to start]</option>
+                    <option value="REDGREEN.C10">REDGREEN [Type RUN to start]</option>
+                    <option value="ROBOT.C10">ROBOT [Type RUN to start]</option>
+                    <option value="ROBOTNIM.C10">ROBOTNIM [Type RUN to start]</option>
+                    <option value="ROBOTR29.C10">ROBOTR29 [Type RUN to start]</option>
+                    <option value="ROMANEMP.C10">ROMANEMP [Type RUN to start]</option>
+                    <option value="ROULETTE.C10">ROULETTE [Type RUN to start]</option>
+                    <option value="ROULVZ.C10">ROULVZ [Type RUN to start]</option>
+                    <option value="RUBICON.C10">RUBICON [Type RUN to start]</option>
+                    <option value="RUBIK.C10">RUBIK [Type RUN to start]</option>
+                    <option value="SEAWAR.C10">SEAWAR [Type RUN to start]</option>
+                    <option value="SHEEPDOG.C10">SHEEPDOG [Type RUN to start]</option>
+                    <option value="SHUFFLE.C10">SHUFFLE [Type RUN to start]</option>
+                    <option value="SKETCH.C10">SKETCH [Type RUN to start]</option>
+                    <option value="SKIDROW.C10">SKIDROW [Type RUN to start]</option>
+                    <option value="SLALOM.C10">SLALOM [Type RUN to start]</option>
+                    <option value="SNAKE.C10">SNAKE [Type RUN to start]</option>
+                    <option value="SNIPER.C10">SNIPER [Type RUN to start]</option>
+                    <option value="SOLOPKR.C10">SOLOPKR [Type RUN to start]</option>
+                    <option value="SORCAST.C10">SORCAST [Type RUN to start]</option>
+                    <option value="SPACEDUL.C10">SPACEDUL [Type RUN to start]</option>
+                    <option value="SPACSLAL.C10">SPACSLAL [Type RUN to start]</option>
+                    <option value="SPHINX.C10">SPHINX [Type RUN to start]</option>
+                    <option value="SPRINKS.C10">SPRINKS [Type RUN to start]</option>
+                    <option value="SSYSTEM.C10">SSYSTEM [Type RUN to start]</option>
+                    <option value="STARFIND.C10">STARFIND [Type RUN to start]</option>
+                    <option value="STARMAP.C10">STARMAP [Type RUN to start]</option>
+                    <option value="STOCKSIM.C10">STOCKSIM [Type RUN to start]</option>
+                    <option value="STRATEGY.C10">STRATEGY [Type RUN to start]</option>
+                    <option value="SUBHUNT.C10">SUBHUNT [Type RUN to start]</option>
+                    <option value="SUBSRCH.C10">SUBSRCH [Type RUN to start]</option>
+                    <option value="SUDOKU.C10">SUDOKU [Type RUN to start]</option>
+                    <option value="SUDOKUB.C10">SUDOKUB [Type RUN to start]</option>
+                    <option value="SURVIVE.C10">SURVIVE [Type RUN to start]</option>
+                    <option value="SWARMS.C10">SWARMS [Type RUN to start]</option>
+                    <option value="SWELFOOP.C10">SWELFOOP [Type RUN to start]</option>
+                    <option value="SWITCH.C10">SWITCH [Type RUN to start]</option>
+                    <option value="SWORDMAN.C10">SWORDMAN [Type RUN to start]</option>
+                    <option value="TACKLEP.C10">TACKLEP [Type RUN to start]</option>
+                    <option value="TANKCAP.C10">TANKCAP [Type RUN to start]</option>
+                    <option value="TBIRD.C10">TBIRD [Type RUN to start]</option>
+                    <option value="THEQUEST.C10">THEQUEST [Type RUN to start]</option>
+                    <option value="THOLIAN.C10">THOLIAN [Type RUN to start]</option>
+                    <option value="TOWER.C10">TOWER [Type RUN to start]</option>
+                    <option value="TRADE.C10">TRADE [Type RUN to start]</option>
+                    <option value="TRAVELER.C10">TRAVELER [Type RUN to start]</option>
+                    <option value="TREASURE.C10">TREASURE [Type RUN to start]</option>
+                    <option value="TREBUCHE.C10">TREBUCHE [Type RUN to start]</option>
+                    <option value="TRON.C10">TRON [Type RUN to start]</option>
+                    <option value="TTREK.C10">TTREK [Type RUN to start]</option>
+                    <option value="TUGAWAR.C10">TUGAWAR [Type RUN to start]</option>
+                    <option value="TURTLE.C10">TURTLE [Type RUN to start]</option>
+                    <option value="TYCOON.C10">TYCOON [Type RUN to start]</option>
+                    <option value="UBOAT.C10">UBOAT [Type RUN to start]</option>
+                    <option value="USFLAG.C10">USFLAG [Type RUN to start]</option>
+                    <option value="VALENTIN.C10">VALENTIN [Type RUN to start]</option>
+                    <option value="VALHALLA.C10">VALHALLA [Type RUN to start]</option>
+                    <option value="VALLEY.C10">VALLEY [Type RUN to start]</option>
+                    <option value="VAMPIRE.C10">VAMPIRE [Type RUN to start]</option>
+                    <option value="VENTURE.C10">VENTURE [Type RUN to start]</option>
+                    <option value="VICTRON.C10">VICTRON [Type RUN to start]</option>
+                    <option value="WILDCAT.C10">WILDCAT [Type RUN to start]</option>
+                    <option value="WSEARCH.C10">WSEARCH [Type RUN to start]</option>
+                    <option value="XMAS.C10">XMAS [Type RUN to start]</option>
+                    <option value="XMASTREE.C10">XMASTREE [Type RUN to start]</option>
+                    <option value="YAHTZEE.C10">YAHTZEE [Type RUN to start]</option>
+                    <option value="ZODIAC.C10">ZODIAC [Type RUN to start]</option>
+                    <option value="ZOMBIES.C10">ZOMBIES [Type RUN to start]</option>
+                    <option value="ZYMON.C10">ZYMON [Type RUN to start]</option>
+                </optgroup>
+            </select>
+        </div>
+        <div id="about">
+            Copyright 2014 &copy; <a href="https://plus.google.com/116425976109095093270/posts">
+                Mike
+                Tinnes
+            </a>
+        </div>
+        <div id="babble">
+            <h2>
+                MC-10 Emulator
+            </h2>
+            <p>
+                Yet another javascript emulator, this time for the legendary *ahem* <a href="http://en.wikipedia.org/wiki/TRS-80_MC-10">
+                    MC-10 microcomputer
+                </a> by Tandy Corp!
+            </p>
+            <p>
+                Purely the result of one persons (me) sentimental journey
+                into his childhood days of PEEK'ing and POKE'ing. Source is available on <a href="https://github.com/mtinnes/mc-10">GitHub</a>.
+            </p>
+            <h3>
+                How to do it...
+            </h3>
+            <p>
+                The keyboard is mapped directly to the original MC-10 <b>physical layout</b> so
+                you'll have to reference <a href="./images/139100-trs80.jpg" target="_blank">this</a>.
+                Use the file button to upload .C10 cassette files or select one from the list.
+            </p>
+            <h3>
+                Shameless Plug
+            </h3>
+            <p>
+                <a href="http://www.catalystllc.biz">http://www.catalystllc.biz</a>
+            </p>
+            <p>
+                <fb:like href="http://mc-10.com" layout="standard" action="like" show_faces="true" share="true"></fb:like>
+            </p>
+            <p>
+                <g:plusone></g:plusone>
+            </p>
+            <p>
+                <a class="github-button" href="https://github.com/mtinnes">Follow @mtinnes</a>
+                <a class="github-button" href="https://github.com/mtinnes/mc-10" aria-label="Star mtinnes/mc-10 on GitHub">Star</a>
+            </p>
+            <h3>
+                Hosted by
+            </h3>
+            <p>
+                <a href="http://faculty.capebretonu.ca/jgerrie/">Dr. James Gerrie</a>, Cape Breton University
+            </p>
+        </div>
+    </div>
+    <form id="download-form" method="post" action="./SaveCassette.ashx">
+        <input type="hidden" id="cassette-data" name="cassette-data" />
+        <input type="hidden" id="filename" name="filename" />
+    </form>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script>        window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+    <script src="./MC10.js?v=10" type="text/javascript"></script>
+    <script type="text/javascript">
+        var mc10 = new MC10({ maxRam: 0x8fff });
+        var charBuffer = [];
+        var idx = 0;
+
+        jQuery.event.props.push('dataTransfer');
+
+        $(document).bind('dragover dragend', function (e) {
+            return false;
+        });
+        $(document).bind('drop', function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            jQuery.each(e.dataTransfer.files, function (index, file) {
+                var fileReader = new FileReader();
+                fileReader.onload = (function (file) {
+                    return function (e) {
+                        charBuffer = [];
+                        Array.prototype.forEach.call(e.target.result, function (char, i) {
+                            charBuffer.push(char.toUpperCase().charCodeAt());
+                        });
+                        doPaste();
+                    };
+                })(file);
+                fileReader.readAsText(file);
+            });
+        })
+        $(document).bind("keydown keypress", function (e) {
+            if (e.which == 8 || e.which == 32) { // 8 == backspace, 32 == spacebar
+                e.preventDefault();
+            }
+        });
+        $("#run").bind("click", function (e) {
+            mc10.isRunning ? mc10.pause() : mc10.run();
+            $("#run").val(mc10.isRunning ? "Pause" : "Run");
+        });
+        $("#reset").bind("click", function (e) {
+            mc10.reset();
+        });
+        $("#paste").bind("click", function (e) {
+        });
+        $("#cassette").bind("change", function (e) {
+            handleFileSelect(e);
+        });
+        $("#cassetteList").bind("change", function (e) {
+            loadCassette();
+        });
+        $("#save").bind("click", function (e) {
+            var fname = prompt("Filename?");
+            var buffer = mc10.save(fname);
+            $("#filename").val(fname);
+            $("#cassette-data").val(arrayBufferToBase64(buffer));
+            $("#download-form").submit();
+        });
+        $(document).ready(function () {
+            mc10.reset();
+            mc10.run();
+            // Check for the various File API support.
+            if (window.File && window.FileReader && window.FileList && window.Blob) {
+                // Great success! All the File APIs are supported.
+            } else {
+                $("#cassette").hide();
+                $("#cassetteList").hide();
+            }
+        });
+
+        function arrayBufferToBase64(buffer) {
+            var binary = ''
+            var bytes = new Uint8Array(buffer)
+            var len = bytes.byteLength;
+            for (var i = 0; i < len; i++) {
+                binary += String.fromCharCode(bytes[i])
+            }
+            return window.btoa(binary);
+        }
+
+        function loadCassette() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "./cassettes/" + $("#cassetteList").val(), true);
+            xhr.responseType = "arraybuffer";
+            xhr.onload = function (e) {
+                if (this.status == 200) {
+                    mc10.load(this.response);
+                }
+            };
+            xhr.send();
+        }
+
+        function doPaste() {
+            pasteChar(0);
+        }
+
+        function pasteChar(idx) {
+            if (idx >= charBuffer.length) {
+                return;
+            }
+            console.debug(charBuffer[idx]);
+
+            var e1 = jQuery.Event('keydown', { keyCode: charBuffer[idx] });
+            $(document).trigger(e1);
+            setTimeout(function () {
+                var e2 = jQuery.Event('keyup', { keyCode: charBuffer[idx] });
+                $(document).trigger(e2);
+                setTimeout(function () {
+                    pasteChar(idx + 1);
+                }, 50);
+            }, 50);
+        }
+
+        function handleFileSelect(evt) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var buffer = reader.result;
+                mc10.load(reader.result);
+            }
+            reader.readAsArrayBuffer(evt.target.files[0]);
+        }
+    </script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-880433-14', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+</body>
+</html>
